@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int arr[202];
+    ListNode* calc(ListNode* curr,ListNode* pre)
+    {
+        if(curr==nullptr)return nullptr;   
+        if(arr[curr->val +100]>1)           
+        {
+            if(pre==nullptr)               
+            {
+                ListNode* tmp=calc(curr->next,nullptr);
+                delete curr;
+                return tmp;
+            }
+            pre->next=curr->next;         
+            delete curr;
+            return calc(pre->next,pre);
+        }
+        calc(curr->next,curr);             
+        return curr;
+    }
+    ListNode* deleteDuplicates(ListNode* head) {
+        memset(arr,0,sizeof(arr));
+        for(ListNode* tmp=head; tmp!=nullptr;tmp=tmp->next)
+        {
+            arr[tmp->val+100]++;   }
+        return calc(head,nullptr);
+    }
+};
