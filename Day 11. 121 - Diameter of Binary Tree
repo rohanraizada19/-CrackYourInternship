@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int dfs(TreeNode* root,int &count){
+        if(root==NULL){
+            return 0;
+        }
+        int l = dfs(root->left,count);
+        int r = dfs(root->right,count);
+        count = max(count,l+r);
+        return 1+max(l,r);
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        int count=0;
+        dfs(root,count);
+        return count;
+    }
+};
