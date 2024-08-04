@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int ans = 0;
+    void dfs(TreeNode* root,bool l){
+        if(!root){
+            return;
+        }
+        if(root->left==nullptr and root->right==nullptr and l){
+            ans+=root->val;
+        }
+        dfs(root->left,true);
+        dfs(root->right,false);
+    } 
+    int sumOfLeftLeaves(TreeNode* root) {
+        if(root->left==nullptr and root->right==nullptr){
+            return 0;
+        }
+        dfs(root,true);
+        return ans;
+    }
+};
