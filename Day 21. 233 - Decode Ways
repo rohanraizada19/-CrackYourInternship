@@ -1,0 +1,23 @@
+class Solution {
+public:
+    unordered_map<string, int> hash;
+
+    int numDecodings(string s) {
+        return rec(s);
+    }
+    int rec(const string& s) {
+        if (hash.find(s) != hash.end()) return hash[s];
+        if (s[0] == '0') return 0;
+        if (s.length() == 1) return 1;
+        if (s.length() == 0) return 1;
+
+        int res = rec(s.substr(1));
+
+        if (stoi(s.substr(0, 2)) <= 26) {
+            res += rec(s.substr(2));
+        }
+
+        hash[s] = res;
+        return res;
+    }
+};
