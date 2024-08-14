@@ -1,0 +1,23 @@
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        vector<int> ans;
+        ListNode* temp = head;
+        while(temp){
+            ans.push_back(temp->val);
+            temp=temp->next;
+        }
+        int s=0;
+        int e=ans.size()-1;
+        temp=head;
+        while(temp and s<=e){
+            temp->val=ans[s++];
+            temp=temp->next;
+            if(temp){
+
+            temp->val=ans[e--];
+            temp=temp->next;
+            }
+        }
+    }
+};
