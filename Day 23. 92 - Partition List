@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void append(ListNode* &root, int n) {
+        if (!root) {
+            root = new ListNode(n);
+            return;
+        }
+        ListNode* temp = root;
+        while(temp -> next) {
+            if (temp -> next) temp = temp -> next;
+            else break;
+        }
+        temp -> next = new ListNode(n);
+    }
+
+    ListNode* partition(ListNode* head, int x) {
+        vector<int> n; 
+        ListNode* t = head;
+        while(t) n.push_back(t -> val), t = t -> next;
+        vector<int> v;
+        for(int i : n) if (i < x) v.push_back(i);
+        for(int i : n) if (i >= x) v.push_back(i);
+        ListNode* ans = nullptr;
+        for(int i: v) append(ans, i);
+
+        return ans;
+    }
+};
